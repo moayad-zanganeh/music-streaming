@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "id": "1",
+      "name": "Jessica Miller",
+      "avatar": "/avatars/jessica.jpg",
+      "time": "20 min ago",
+      "message": "Adele’s voice is like nothing else in the music industry today. Every song she sings is filled with so much emotion and power...",
+      "likes": 39,
+      "replies": [
+        {
+          "id": 1,
+          "name": "You",
+          "avatar": "/avatars/you.jpg",
+          "time": "Just now",
+          "message": "oh yes"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "David Thompson",
+      "avatar": "/avatars/david.jpg",
+      "time": "10 min ago",
+      "message": "I've been a fan of Adele since her first album, and she just keeps getting better...",
+      "likes": 13,
+      "replies": []
+    },
+    {
+      "id": "3",
+      "name": "Emily Johnson",
+      "avatar": "/avatars/emily.jpg",
+      "time": "10 days ago",
+      "message": "Adele’s music has been the soundtrack of my life. Her lyrics resonate with so many of us...",
+      "likes": 50,
+      "replies": []
+    },
+    {
+      "id": "1754001529953",
+      "name": "You",
+      "avatar": "/avatars/you.jpg",
+      "time": "Just now",
+      "message": "hello",
+      "likes": 0,
+      "replies": []
+    },
+    {
+      "id": "1756667248008",
+      "name": "You",
+      "avatar": "/avatars/you.jpg",
+      "time": "Just now",
+      "message": "hi",
+      "likes": 0,
+      "replies": []
+    },
+    {
+      "id": "1756725489368",
+      "name": "You",
+      "avatar": "/avatars/you.jpg",
+      "time": "Just now",
+      "message": "hooooy",
+      "likes": 0,
+      "replies": []
+    },
+    {
+      "id": 1757100477674,
+      "name": "You",
+      "avatar": "/avatars/you.jpg",
+      "time": "Just now",
+      "message": "Thank you for your warm welcome❤️",
+      "likes": 0,
+      "replies": []
+    }
+  ]
+}
