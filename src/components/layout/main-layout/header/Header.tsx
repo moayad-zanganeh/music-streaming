@@ -52,7 +52,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     fontSize: "0.85rem",
     [theme.breakpoints.up("sm")]: {
       fontSize: "1rem",
-
     },
     [theme.breakpoints.up("md")]: {
       width: "20ch",
@@ -64,6 +63,8 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const [searchValue, setSearchValue] = React.useState(""); // ✅ search state
   const router = useRouter();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -85,6 +86,16 @@ export default function Header() {
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  // ✅ Handle Enter press
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (searchValue.trim().toLowerCase() === "adele") {
+        router.push("/artist-page");
+      }
+    }
   };
 
   const menuId = "primary-search-account-menu";
@@ -149,28 +160,46 @@ export default function Header() {
     <Box sx={{ flexGrow: 1, width: "96%", position: "relative", left: "4%" }}>
       <AppBar position="static" sx={{ height: "72px" }}>
         <Toolbar>
-          <Box sx={{ position:"relative",left:{xs:"6%",sm:"6%",md:0},display: "flex", gap: "16px", alignItems: "center", my: 3 }}>
+          <Box
+            sx={{
+              position: "relative",
+              left: { xs: "6%", sm: "6%", md: 0 },
+              display: "flex",
+              gap: "16px",
+              alignItems: "center",
+              my: 3,
+            }}
+          >
             <Typography noWrap component="div" sx={{ display: { xs: "none", sm: "block" } }}>
               Music
             </Typography>
             <Typography noWrap component="div" sx={{ display: { xs: "none", sm: "block" } }}>
               Podcast
             </Typography>
+
+            {/* ✅ Search Input */}
             <Search
               sx={{
                 border: "1px solid #5E63EA",
                 borderRadius: "24px",
                 height: { xs: "32px", sm: "40px" },
-                position:"relative",
-                left:{xs:"16%",sm:"0"}
+                position: "relative",
+                left: { xs: "16%", sm: "0" },
               }}
             >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search" inputProps={{ "aria-label": "search" }} />
+              <StyledInputBase
+                placeholder="Search"
+                inputProps={{ "aria-label": "search" }}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)} // ✅ update state
+                onKeyDown={handleKeyDown} // ✅ redirect on Enter
+              />
             </Search>
           </Box>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{

@@ -59,8 +59,8 @@ const Sidebar: React.FC = () => {
   const menuItems = [
     { id: 1, label: 'Home', icon: <HomeIcon />, path: '/' },
     { id: 2, label: 'Explore', icon: <ExploreIcon />, path: '/explore' },
-    { id: 3, label: 'Library', icon: <LibraryBooksIcon />, path: '/library' },
-    { id: 4, label: 'Advanced Search', icon: <SearchIcon />, path: '/search' },
+    { id: 3, label: 'Artist', icon: <LibraryBooksIcon />, path: '/artist-page' },
+    // { id: 4, label: 'Advanced Search', icon: <SearchIcon />, path: '/search' },
   ];
 
   return (
@@ -145,7 +145,7 @@ const Sidebar: React.FC = () => {
         sx={{
           position: 'fixed',
           top: '64%',
-          left: open ? {xs: "44.8%", sm: "24.8%",md:'18.8%',lg:'13.8%',xl:'7.8%'} : {xs: "8.8%", sm: "4.8%",md:'3.8%',lg:'3.1%',xl:'1.8%'},
+          left: open ? {xs: "44.8%", sm: "24.8%",md:'18.8%',lg:'15.8%',xl:'7.8%'} : {xs: "8.8%", sm: "4.8%",md:'3.8%',lg:'3.1%',xl:'1.8%'},
           transform: 'translate(-50%, -50%)',
           rotate: '40deg',
           backgroundColor: '#110627',
