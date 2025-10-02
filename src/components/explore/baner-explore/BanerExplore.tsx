@@ -21,7 +21,7 @@ const BanerExplore = () => {
           width: '100%',
           maxWidth: '600px',
           position: 'relative',
-          left: '-16%',
+          left:{ xs: "56px", sm: "-16px", md: "-16px" },
         }}
       >
         <Typography variant="h4" color="white" gutterBottom>

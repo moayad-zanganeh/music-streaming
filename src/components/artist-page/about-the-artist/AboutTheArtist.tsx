@@ -6,7 +6,7 @@ export default function AboutTheArtist() {
     <Box sx={{ my: 5 }}>
       <Box
         sx={{
-          display: 'flex',
+          display: { xs: "none", sm: "none", md: "flex", lg: "flex", xl: "flex" },
           position: 'relative',
           alignItems: 'flex-end',
           flexDirection: 'column',

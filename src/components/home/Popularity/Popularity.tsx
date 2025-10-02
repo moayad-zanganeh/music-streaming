@@ -8,10 +8,11 @@ export default function Popularity() {
       sx={{
         width: '88%',
         display: 'flex',
-        gap: 9,
+        flexDirection: { xs: 'column', md: 'row' },
+        gap: { xs: 4, md: 9 },
         position: 'relative',
         mx: 'auto',
-        left: '6%',
+        left: { xs: "11%", md: '8%' },
       }}
     >
       <BillboardTop />

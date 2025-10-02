@@ -1,49 +1,35 @@
-import React, { useRef } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import React, { useState } from 'react';
+import { Box, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const musicItems = [
-  {
-    src: '/explore/your-generes/Frame 69.png',
-    alt: 'Regional',
-    title1: 'Regional',
-  },
-  {
-    src: '/explore/your-generes/Frame 69 (1).png',
-    alt: 'Classic',
-    title1: 'Classic',
-  },
-  {
-    src: '/explore/your-generes/Frame 69 (2).png',
-    alt: 'Jazz',
-    title1: 'Jazz',
-  },
-  {
-    src: '/explore/your-generes/Frame 69 (3).png',
-    alt: 'Rock',
-    title1: 'Rock',
-  },
-  {
-    src: '/explore/your-generes/Frame 69 (4).png',
-    alt: 'Pop',
-    title1: 'Pop',
-  },
+  { src: '/explore/your-generes/Frame 69.png', alt: 'Regional', title1: 'Regional' },
+  { src: '/explore/your-generes/Frame 69 (1).png', alt: 'Classic', title1: 'Classic' },
+  { src: '/explore/your-generes/Frame 69 (2).png', alt: 'Jazz', title1: 'Jazz' },
+  { src: '/explore/your-generes/Frame 69 (3).png', alt: 'Rock', title1: 'Rock' },
+  { src: '/explore/your-generes/Frame 69 (4).png', alt: 'Pop', title1: 'Pop' },
 ];
 
 export default function ExpeloreYourGeneres() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: 200,
-        behavior: 'smooth',
-      });
+  const [startIndex, setStartIndex] = useState(0);
+
+  const itemsPerPage = isMobile ? 1 : isTablet ? 3 : musicItems.length;
+
+  const handleNext = () => {
+    if (startIndex + itemsPerPage < musicItems.length) {
+      setStartIndex(startIndex + itemsPerPage);
+    } else {
+      setStartIndex(0);
     }
   };
+
+  const visibleItems = isMobile || isTablet 
+    ? musicItems.slice(startIndex, startIndex + itemsPerPage)
+    : musicItems;
 
   return (
     <Box
@@ -78,38 +64,29 @@ export default function ExpeloreYourGeneres() {
           display: 'flex',
           flexDirection: 'row-reverse',
           alignItems: 'center',
-          gap: 8,
-          ml: 16,
+          gap: 2,
+          ml: 4,
         }}
       >
-        <IconButton
-          onClick={handleScroll}
-          sx={{
-            transform: 'translateY(-50%)',
-            zIndex: 1,
-            color: 'white',
-            position: 'relative',
-            right: '32px',
-            height: '20px',
-          }}
-        >
-          <ArrowForwardIosIcon />
-        </IconButton>
+        {(isMobile || isTablet) && (
+          <IconButton onClick={handleNext} sx={{ color: 'white', position: 'relative', left: '16px' }}>
+            <ArrowForwardIosIcon />
+          </IconButton>
+        )}
 
         <Box
-          ref={scrollRef}
           sx={{
             display: 'flex',
-            overflowX: 'auto',
             gap: 3,
             py: 4,
+            position: 'relative',
+            left: { sm: '5%', md: 0 },
+            overflowX: isMobile || isTablet ? 'hidden' : 'auto',
             scrollBehavior: 'smooth',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
+            '&::-webkit-scrollbar': { display: 'none' },
           }}
         >
-          {musicItems.map((item, index) => (
+          {visibleItems.map((item, index) => (
             <Box key={index} sx={{ textAlign: 'left', minWidth: 200 }}>
               <Box
                 sx={{
@@ -118,9 +95,7 @@ export default function ExpeloreYourGeneres() {
                   height: 200,
                   borderRadius: 3,
                   overflow: 'hidden',
-                  '&:hover .overlay': {
-                    opacity: 1,
-                  },
+                  '&:hover .overlay': { opacity: 1 },
                 }}
               >
                 <img

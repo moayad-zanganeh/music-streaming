@@ -20,16 +20,17 @@ export default function BannerArtist() {
           left: '16%',
           width: '50%',
           bottom: '28%',
-          display: 'flex',
+          display:  'flex',
+          flexDirection: { xs: "column", sm: "row", md: "row", lg: "row", xl: "row" },
           gap: 3,
         }}
       >
         <img
           src="/artist-page/baner/Picture.png"
           alt="Artist"
-          style={{ maxWidth: '100%' }}
+          style={{ maxWidth: { xs: "54%", sm: "100%", md: "100%", lg: "100%", xl: "100%" } }}
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1, sm: 2, md: 2, lg: 2, xl: 2 } }}>
           <Typography variant="h4" sx={{ color: '#fff' }}>
             Adele
           </Typography>

@@ -20,7 +20,7 @@ interface Reply {
 }
 
 interface Comment {
-  id: number;
+  id: string | number;
   name: string;
   avatar: string;
   time: string;
@@ -29,72 +29,96 @@ interface Comment {
   replies: Reply[];
 }
 
-// داده‌های Mock برای زمانی که سرور در دسترس نیست
 const mockComments: Comment[] = [
   {
-    id: 1,
-    name: 'John Doe',
-    avatar: '/avatars/john.jpg',
-    time: '2 hours ago',
-    message: 'This is an amazing track! Love the beats.',
-    likes: 5,
+    id: "1",
+    name: "Jessica Miller",
+    avatar: "/avatars/jessica.jpg",
+    time: "20 min ago",
+    message: "Adele's voice is like nothing else in the music industry today. Every song she sings is filled with so much emotion and power...",
+    likes: 39,
     replies: [
       {
-        id: 101,
-        name: 'Jane Smith',
-        avatar: '/avatars/jane.jpg',
-        time: '1 hour ago',
-        message: 'I totally agree! The production is fantastic.',
-      },
-    ],
+        id: 1,
+        name: "You",
+        avatar: "/avatars/you.jpg",
+        time: "Just now",
+        message: "oh yes"
+      }
+    ]
   },
   {
-    id: 2,
-    name: 'Alex Johnson',
-    avatar: '/avatars/alex.jpg',
-    time: '3 hours ago',
-    message: 'The lyrics are so meaningful. Great job!',
-    likes: 3,
-    replies: [],
+    id: "2",
+    name: "David Thompson",
+    avatar: "/avatars/david.jpg",
+    time: "10 min ago",
+    message: "I've been a fan of Adele since her first album, and she just keeps getting better...",
+    likes: 13,
+    replies: []
   },
+  {
+    id: "3",
+    name: "Emily Johnson",
+    avatar: "/avatars/emily.jpg",
+    time: "10 days ago",
+    message: "Adele's music has been the soundtrack of my life. Her lyrics resonate with so many of us...",
+    likes: 50,
+    replies: []
+  }
 ];
 
 const CommentSection: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
-  const [replyingTo, setReplyingTo] = useState<number | null>(null);
+  const [replyingTo, setReplyingTo] = useState<number | string | null>(null);
   const [replyText, setReplyText] = useState<string>('');
   const [newComment, setNewComment] = useState<string>('');
   const [isOnline, setIsOnline] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const API_BASE_URL = 'http://localhost:3001';
+
+  const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout = 3000) => {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      clearTimeout(id);
+      return response;
+    } catch (error) {
+      clearTimeout(id);
+      throw error;
+    }
+  };
 
   const checkServerStatus = async () => {
     try {
-      // تست اتصال به سرور
-      await fetch('http://localhost:3001/comments', {
+      await fetchWithTimeout(`${API_BASE_URL}/comments`, {
         method: 'HEAD',
-        mode: 'no-cors',
       });
       setIsOnline(true);
-    } catch (error) {
+    } catch {
       setIsOnline(false);
-      setComments(mockComments);
     }
   };
 
   const fetchComments = async () => {
-    if (!isOnline) {
-      setComments(mockComments);
-      return;
-    }
-
+    setIsLoading(true);
+    
     try {
-      const response = await fetch('http://localhost:3001/comments');
+      const response = await fetchWithTimeout(`${API_BASE_URL}/comments`);
       if (!response.ok) throw new Error('Server error');
       const data = await response.json();
       setComments(data);
+      setIsOnline(true);
     } catch (error) {
-      console.error('Failed to fetch comments, using mock data:', error);
       setIsOnline(false);
       setComments(mockComments);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,7 +136,7 @@ const CommentSection: React.FC = () => {
 
     if (isOnline) {
       try {
-        await fetch(`http://localhost:3001/comments/${comment.id}`, {
+        await fetch(`${API_BASE_URL}/comments/${comment.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +148,6 @@ const CommentSection: React.FC = () => {
       }
     }
 
-    // به‌روزرسانی local state در هر صورت
     setComments((prev) =>
       prev.map((c) => (c.id === comment.id ? updatedComment : c))
     );
@@ -148,7 +171,7 @@ const CommentSection: React.FC = () => {
 
     if (isOnline) {
       try {
-        await fetch(`http://localhost:3001/comments/${comment.id}`, {
+        await fetch(`${API_BASE_URL}/comments/${comment.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -160,7 +183,6 @@ const CommentSection: React.FC = () => {
       }
     }
 
-    // به‌روزرسانی local state
     setComments((prev) =>
       prev.map((c) => (c.id === comment.id ? updatedComment : c))
     );
@@ -183,20 +205,22 @@ const CommentSection: React.FC = () => {
 
     if (isOnline) {
       try {
-        await fetch('http://localhost:3001/comments', {
+        await fetch(`${API_BASE_URL}/comments`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(newCommentData),
         });
+        fetchComments();
       } catch (error) {
         console.error('Failed to send comment:', error);
+        setComments(prev => [...prev, newCommentData]);
       }
+    } else {
+      setComments(prev => [...prev, newCommentData]);
     }
-
-    // به‌روزرسانی local state
-    setComments((prev) => [...prev, newCommentData]);
+    
     setNewComment('');
   };
 
@@ -204,8 +228,16 @@ const CommentSection: React.FC = () => {
     alert('Voice recording not implemented.');
   };
 
+  if (isLoading) {
+    return (
+      <Box sx={{ maxWidth: 800, mx: 'auto', px: 2, py: 3 }}>
+        <Typography>Loading comments...</Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', px: 2, py: 3 }}>
+    <Box sx={{ maxWidth: { xs: 366, sm: 366, md: 800, lg: 800, xl: 800 }, mx: 'auto', px: 2, py: 3 }}>
       <Typography variant="h6" mb={2}>
         Comments ({comments.length})
         {!isOnline && (

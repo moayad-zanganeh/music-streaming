@@ -16,7 +16,7 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/router';
-import Image from 'next/image'; // اضافه کردن کامپوننت Image از Next.js
+import Image from 'next/image'; 
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -145,7 +145,7 @@ const Sidebar: React.FC = () => {
         sx={{
           position: 'fixed',
           top: '64%',
-          left: open ? '14.8%' : '2.8%',
+          left: open ? {xs: "44.8%", sm: "24.8%",md:'18.8%',lg:'13.8%',xl:'7.8%'} : {xs: "8.8%", sm: "4.8%",md:'3.8%',lg:'3.1%',xl:'1.8%'},
           transform: 'translate(-50%, -50%)',
           rotate: '40deg',
           backgroundColor: '#110627',
