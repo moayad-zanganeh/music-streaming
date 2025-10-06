@@ -71,17 +71,23 @@ const Sidebar: React.FC = () => {
         open={open}
         sx={{
           '& .MuiDrawer-paper': {
-            width: open ? 220 : 60,
+            width: open ? 'clamp(12rem, 25vw, 15rem)' : 'clamp(3rem, 8vw, 4rem)',
             overflow: 'hidden',
+            transition: 'width 0.3s ease',
           },
         }}
       >
         <LogoContainer sx={{ border: 'none' }}>
-          <Image
+          <Box
+            component="img"
             src="/logo1.svg"
             alt="Logo"
-            width={open ? 120 : 32}
-            height={open ? 40 : 32}
+            sx={{
+              width: open ? 'clamp(3rem, 8vw, 7.5rem)' : 'clamp(1.25rem, 3vw, 2rem)',
+              height: open ? 'clamp(1.25rem, 2.5vw, 2.5rem)' : 'clamp(1.25rem, 3vw, 2rem)',
+              objectFit: 'contain',
+              transition: 'all 0.3s ease',
+            }}
           />
         </LogoContainer>
 
@@ -98,14 +104,15 @@ const Sidebar: React.FC = () => {
                   <ListItemButton
                     onClick={() => router.push(item.path)}
                     sx={{
-                      minHeight: 48,
+                      minHeight: 'clamp(2.5rem, 6vh, 3rem)',
                       justifyContent: open ? 'initial' : 'center',
-                      px: 2,
+                      px: 'clamp(0.5rem, 2vw, 1rem)',
+                      py: 'clamp(0.25rem, 1vh, 0.5rem)',
                       backgroundColor: isActive
                         ? 'rgba(255, 255, 255, 0.1)'
                         : 'transparent',
                       backdropFilter: isActive ? 'blur(8px)' : 'none',
-                      borderRadius: '12px',
+                      borderRadius: 'clamp(0.5rem, 1.5vw, 0.75rem)',
                       transition: 'all 0.3s ease',
                       '&:hover': {
                         backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -116,10 +123,13 @@ const Sidebar: React.FC = () => {
                     <ListItemIcon
                       sx={{
                         minWidth: 0,
-                        mr: open ? 3 : 'auto',
+                        mr: open ? 'clamp(1rem, 3vw, 1.5rem)' : 'auto',
                         justifyContent: 'center',
                         color: isActive ? 'white' : 'rgba(255,255,255,0.7)',
                         transition: 'color 0.3s ease',
+                        '& .MuiSvgIcon-root': {
+                          fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
+                        },
                       }}
                     >
                       {item.icon}
@@ -131,6 +141,10 @@ const Sidebar: React.FC = () => {
                         opacity: open ? 1 : 0,
                         display: open ? 'block' : 'none',
                         transition: 'opacity 0.3s',
+                        '& .MuiListItemText-primary': {
+                          fontSize: 'clamp(0.75rem, 2vw, 0.9rem)',
+                          fontWeight: 500,
+                        },
                       }}
                     />
                   </ListItemButton>
@@ -145,7 +159,7 @@ const Sidebar: React.FC = () => {
         sx={{
           position: 'fixed',
           top: '64%',
-          left: open ? {xs: "44.8%", sm: "24.8%",md:'18.8%',lg:'15.8%',xl:'7.8%'} : {xs: "8.8%", sm: "4.8%",md:'3.8%',lg:'3.1%',xl:'1.8%'},
+          left: open ? 'clamp(20%, 25vw, 30%)' : 'clamp(5%, 8vw, 12%)',
           transform: 'translate(-50%, -50%)',
           rotate: '40deg',
           backgroundColor: '#110627',
@@ -153,10 +167,13 @@ const Sidebar: React.FC = () => {
           borderRight: 'solid 1px #2e2441',
           borderRadius: '0 18% 0 0',
           zIndex: 1300,
-          padding: '8px',
+          padding: 'clamp(0.25rem, 1vw, 0.5rem)',
           backdropFilter: 'blur(6px)',
           cursor: 'pointer',
           transition: 'left 0.3s ease',
+          '& .MuiSvgIcon-root': {
+            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+          },
         }}
         onClick={handleDrawerToggle}
       >
