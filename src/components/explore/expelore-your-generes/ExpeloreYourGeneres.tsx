@@ -45,16 +45,17 @@ export default function ExpeloreYourGeneres() {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: { xs: 'center', sm: 'space-between' },
           width: '81%',
-          ml: 3,
+          ml: { xs: 0, sm: 3 },
           my: '-2%',
+          textAlign: { xs: 'center', sm: 'left' },
         }}
       >
         <Typography variant="h6" sx={{ color: '#fff' }}>
           Explore your Generes
         </Typography>
-        <Typography sx={{ color: '#fff', cursor: 'pointer' }}>
+        <Typography sx={{ color: '#fff', cursor: 'pointer', display: { xs: 'none', sm: 'block' } }}>
           View More
         </Typography>
       </Box>
@@ -80,7 +81,9 @@ export default function ExpeloreYourGeneres() {
             gap: 3,
             py: 4,
             position: 'relative',
-            left: { sm: '5%', md: 0 },
+            left: { xs: 0, sm: '5%', md: 0 },
+            mx: { xs: 'auto', sm: 0 },
+            justifyContent: { xs: 'center', sm: 'flex-start' },
             overflowX: isMobile || isTablet ? 'hidden' : 'auto',
             scrollBehavior: 'smooth',
             '&::-webkit-scrollbar': { display: 'none' },

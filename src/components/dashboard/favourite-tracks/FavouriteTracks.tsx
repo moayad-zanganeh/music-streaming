@@ -68,7 +68,7 @@ export default function FavouriteTracks() {
         <Typography variant="h6" sx={{ color: '#fff' }}>
           New Albums
         </Typography>
-        <Typography sx={{ color: '#fff', cursor: 'pointer' }}>
+        <Typography sx={{ color: '#fff', cursor: 'pointer', display: { xs: 'none', sm: 'block' } }}>
           View More
         </Typography>
       </Box>

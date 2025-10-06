@@ -1,6 +1,16 @@
+import * as React from 'react';
 import { Box, TextField, Typography, InputAdornment } from '@mui/material';
+import { useRouter } from 'next/router';
 import SearchIcon from '@mui/icons-material/Search';
 const BanerExplore = () => {
+  const router = useRouter();
+  const [value, setValue] = React.useState("");
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const q = value.trim();
+      if (q) router.push(`/search?q=${encodeURIComponent(q)}`);
+    }
+  };
   return (
     <Box
       sx={{
@@ -21,7 +31,9 @@ const BanerExplore = () => {
           width: '100%',
           maxWidth: '600px',
           position: 'relative',
-          left:{ xs: "56px", sm: "-16px", md: "-16px" },
+          left:{ xs: 0, sm: "-16px", md: "-16px" },
+          textAlign: { xs: 'center', sm: 'left' },
+          mx: { xs: 'auto', sm: 0 },
         }}
       >
         <Typography variant="h4" color="white" gutterBottom>
@@ -32,6 +44,9 @@ const BanerExplore = () => {
           label="Search"
           placeholder="What do you want to listen to?"
           variant="outlined"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={onKeyDown}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -48,7 +63,7 @@ const BanerExplore = () => {
             },
           }}
           sx={{
-            width: '60%',
+            width: { xs: '90%', sm: '60%' },
             backgroundColor: '#252758',
             borderRadius: '16px',
             mb: 2,
@@ -71,7 +86,7 @@ const BanerExplore = () => {
           }}
         />
 
-        <Typography component="p" color="white">
+        <Typography component="p" color="white" sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
           Search History
         </Typography>
       </Box>

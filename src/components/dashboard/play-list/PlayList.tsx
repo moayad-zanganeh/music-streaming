@@ -126,7 +126,7 @@ export default function PlaylistGrid() {
         <Typography variant="h6" sx={{ color: '#fff' }}>
           Playlists
         </Typography>
-        <Typography sx={{ color: '#fff', cursor: 'pointer' }}>
+        <Typography sx={{ color: '#fff', cursor: 'pointer', display: { xs: 'none', sm: 'block' } }}>
           View More
         </Typography>
       </Box>

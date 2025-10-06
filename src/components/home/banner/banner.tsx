@@ -11,17 +11,19 @@ export default function Banner() {
         src="/home/09 1.png" 
         style={{ 
           width: '100%', 
-          height: isMobile ? '200px' : '300px', 
+          height: isMobile ? '28vh' : '36vh',
+          maxHeight: '420px',
+          minHeight: '314px',
           objectFit: 'cover' 
         }} 
         alt="Banner" 
       />
       <Box sx={{ 
         position: 'absolute', 
-        top: isMobile ? '20%' : '50%', 
+        top: isMobile ? '22%' : '50%', 
         right: {xs: "37%", sm: "10%", md: "10%", lg: "10%"},
         transform: isMobile ? 'translate(0, -20%)' : 'translate(0, -50%)',
-        width: {xs: "40%", sm: "48%", md: "40%", lg: "40%"},
+        width: {xs: "42%", sm: "48%", md: "40%", lg: "40%"},
         textAlign: isMobile ? 'center' : 'left'
       }}>
         <Typography variant={isMobile ? 'h6' : 'h4'}>This Month's</Typography>
@@ -38,19 +40,19 @@ export default function Banner() {
         <Box sx={{
           display: 'flex',
           flexDirection: {xs: "column", sm: "row", md: "row", lg: "row"},
-          gap: '10px',
+          gap: '1rem',
           justifyContent: 'center',
           alignItems: 'center',
           mt: isMobile ? 1 : 0
         }}>
           <Button
             sx={{
-              width:{xs: "60%", sm: "100%", md: "100%", lg: "100%"},
+              width:{xs: "62%", sm: "100%", md: "100%", lg: "100%"},
               borderRadius: '32px',
-              border: 'solid #5E63EA',
+              border: '1px solid #5E63EA',
               background: '#5E63EA',
               color: '#fff',
-              height: '32px',
+              height: '2.2rem',
               fontSize: isMobile ? '0.7rem' : '0.8rem'
             }}
           >
@@ -59,10 +61,10 @@ export default function Banner() {
           <Button
             sx={{
               color: '#5E63EA',
-              width:{xs: "60%", sm: "100%", md: "100%", lg: "100%"},
-              border: 'solid #5E63EA',
+              width:{xs: "62%", sm: "100%", md: "100%", lg: "100%"},
+              border: '1px solid #5E63EA',
               borderRadius: '32px',
-              height: '32px',
+              height: '2.2rem',
               fontSize: isMobile ? '0.7rem' : '0.8rem'
             }}
           >

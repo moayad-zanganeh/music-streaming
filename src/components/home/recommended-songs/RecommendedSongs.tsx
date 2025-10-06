@@ -61,7 +61,7 @@ export default function RecommendedSongs() {
         </Typography>
         <Typography
           sx={{
-            display: { xs: "none", sm: "block", md: "block", lg: "block" },
+            display: { xs: "none", sm: "block" },
             color: "#fff",
             cursor: "pointer",
             fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },

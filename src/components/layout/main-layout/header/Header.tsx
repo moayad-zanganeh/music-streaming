@@ -88,13 +88,12 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  // ✅ Handle Enter press
+  // ✅ Handle Enter press -> navigate to /search?q=
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (searchValue.trim().toLowerCase() === "adele") {
-        router.push("/artist-page");
-      }
+      const q = searchValue.trim();
+      if (q) router.push(`/search?q=${encodeURIComponent(q)}`);
     }
   };
 
@@ -158,7 +157,13 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1, width: "96%", position: "relative", left: "4%" }}>
-      <AppBar position="static" sx={{ height: "72px" }}>
+      <AppBar
+        position="static"
+        sx={{
+          height: { xs: "56px", sm: "64px", md: "8vh" },
+          minHeight: { xs: "56px", sm: "64px", md: "64px" },
+        }}
+      >
         <Toolbar>
           <Box
             sx={{
@@ -182,7 +187,7 @@ export default function Header() {
               sx={{
                 border: "1px solid #5E63EA",
                 borderRadius: "24px",
-                height: { xs: "32px", sm: "40px" },
+                height: { xs: "2rem", sm: "2.5rem" },
                 position: "relative",
                 left: { xs: "16%", sm: "0" },
               }}
