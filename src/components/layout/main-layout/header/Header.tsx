@@ -254,7 +254,12 @@ export default function Header() {
                 <NotificationsNoneIcon />
               </Badge>
             </IconButton>
-            <img src="/Ellipse 3379.svg" alt="Profile" style={{ height: "28px", width: "28px" }} />
+            <img 
+              src="/Ellipse 3379.svg" 
+              alt="Profile" 
+              style={{ height: "28px", width: "28px", cursor: "pointer" }} 
+              onClick={() => router.push("/dashboard")}
+            />
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
