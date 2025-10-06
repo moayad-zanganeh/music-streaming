@@ -160,8 +160,8 @@ export default function Header() {
       <AppBar
         position="static"
         sx={{
-          height: 'clamp(3.5rem, 8vh, 4rem)',
-          minHeight: 'clamp(3.5rem, 8vh, 4rem)',
+          height: { xs: "56px", sm: "64px", md: "8vh" },
+          minHeight: { xs: "56px", sm: "64px", md: "64px" },
         }}
       >
         <Toolbar>
@@ -170,31 +170,15 @@ export default function Header() {
               position: "relative",
               left: { xs: "6%", sm: "6%", md: 0 },
               display: "flex",
-              gap: 'clamp(0.5rem, 2vw, 1rem)',
+              gap: "16px",
               alignItems: "center",
-              my: 'clamp(0.5rem, 2vh, 1rem)',
+              my: 3,
             }}
           >
-            <Typography 
-              noWrap 
-              component="div" 
-              sx={{ 
-                display: { xs: "none", sm: "block" },
-                fontSize: 'clamp(0.8rem, 2vw, 1rem)',
-                fontWeight: 500,
-              }}
-            >
+            <Typography noWrap component="div" sx={{ display: { xs: "none", sm: "block" } }}>
               Music
             </Typography>
-            <Typography 
-              noWrap 
-              component="div" 
-              sx={{ 
-                display: { xs: "none", sm: "block" },
-                fontSize: 'clamp(0.8rem, 2vw, 1rem)',
-                fontWeight: 500,
-              }}
-            >
+            <Typography noWrap component="div" sx={{ display: { xs: "none", sm: "block" } }}>
               Podcast
             </Typography>
 
@@ -202,8 +186,8 @@ export default function Header() {
             <Search
               sx={{
                 border: "1px solid #5E63EA",
-                borderRadius: 'clamp(1rem, 3vw, 1.5rem)',
-                height: 'clamp(2rem, 4vh, 2.5rem)',
+                borderRadius: "24px",
+                height: { xs: "2rem", sm: "2.5rem" },
                 position: "relative",
                 left: { xs: "16%", sm: "0" },
               }}
@@ -226,19 +210,19 @@ export default function Header() {
             sx={{
               display: { xs: "none", md: "flex" },
               alignItems: "center",
-              gap: 'clamp(0.5rem, 2vw, 1rem)',
+              gap: "16px",
             }}
           >
             <Box
               sx={{
                 display: "flex",
-                width: 'clamp(8rem, 20vw, 13.5rem)',
-                height: 'clamp(2rem, 5vh, 3rem)',
-                padding: 'clamp(0.5rem, 1.5vw, 1.25rem) clamp(1rem, 3vw, 1.25rem)',
+                width: "216px",
+                height: "48px",
+                padding: "10px 20px",
                 justifyContent: "center",
                 alignItems: "center",
                 flexShrink: "0",
-                borderRadius: 'clamp(1rem, 3vw, 1.875rem)',
+                borderRadius: "30px",
                 border: "1px solid #5E63EA",
                 background:
                   "radial-gradient(58.01% 55.04% at 50% 50%, #5E63EA 0%, #2F3275 100%)",
@@ -251,22 +235,17 @@ export default function Header() {
                 sx={{
                   display: { xs: "none", sm: "block" },
                   fontFamily: "Roboto",
-                  fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
+                  fontSize: "15px",
                   fontWeight: 600,
                 }}
               >
                 Upgrade to Premium
               </Typography>
               <Box onClick={() => router.push("/dashboard")} sx={{ cursor: "pointer" }}>
-                <Box
-                  component="img"
+                <img
                   src="/workspace_premium.svg"
                   alt="Workspace Premium"
-                  sx={{
-                    height: 'clamp(1rem, 2.5vw, 1.75rem)',
-                    width: 'clamp(1rem, 2.5vw, 1.75rem)',
-                    cursor: "pointer",
-                  }}
+                  style={{ height: "28px", width: "28px", cursor: "pointer" }}
                 />
               </Box>
             </Box>
@@ -275,15 +254,10 @@ export default function Header() {
                 <NotificationsNoneIcon />
               </Badge>
             </IconButton>
-            <Box
-              component="img"
-              src="/Ellipse 3379.svg"
-              alt="Profile"
-              sx={{
-                height: 'clamp(1rem, 2.5vw, 1.75rem)',
-                width: 'clamp(1rem, 2.5vw, 1.75rem)',
-                cursor: "pointer",
-              }}
+            <img 
+              src="/Ellipse 3379.svg" 
+              alt="Profile" 
+              style={{ height: "28px", width: "28px", cursor: "pointer" }} 
               onClick={() => router.push("/dashboard")}
             />
           </Box>
