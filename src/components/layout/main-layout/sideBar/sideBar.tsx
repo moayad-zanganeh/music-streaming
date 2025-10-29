@@ -145,7 +145,7 @@ const Sidebar: React.FC = () => {
         sx={{
           position: 'fixed',
           top: '64%',
-          left: open ? {xs: "45.8%", sm: "24.8%",md:'18.8%',lg:'15.8%',xl:'7.8%'} : {xs: "8.8%", sm: "4.8%",md:'4.8%',lg:'3.1%',xl:'1.8%'},
+          left: open ? {xs: "45.8%", sm: "24.8%",md:'18.8%',lg:'15.8%',xl:'13%'} : {xs: "8.8%", sm: "4.8%",md:'4.8%',lg:'3.1%',xl:'2.8%'},
           transform: 'translate(-50%, -50%)',
           rotate: '40deg',
           backgroundColor: '#110627',
